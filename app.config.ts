@@ -2,8 +2,9 @@ import { ExpoConfig, ConfigContext } from 'expo/config';
 
 export default ({ config }: ConfigContext): ExpoConfig => {
   return {
-    name: 'Chatwoot',
-    slug: process.env.EXPO_PUBLIC_APP_SLUG || 'chatwoot-mobile',
+    name: 'Solace',
+    slug: process.env.EXPO_PUBLIC_APP_SLUG || 'solace-mobile-app',
+    scheme: 'solace',
     version: '4.0.17',
     orientation: 'portrait',
     icon: './assets/icon.png',
@@ -17,7 +18,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     ios: {
       supportsTablet: true,
-      bundleIdentifier: 'com.chatwoot.app',
+      bundleIdentifier: 'com.solace.app',
       infoPlist: {
         NSCameraUsageDescription:
           'This app requires access to the camera to upload images and videos.',
@@ -29,19 +30,18 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         UIBackgroundModes: ['fetch', 'remote-notification'],
         ITSAppUsesNonExemptEncryption: false,
       },
-      // Please use the relative path to the google-services.json file
       googleServicesFile: process.env.EXPO_PUBLIC_IOS_GOOGLE_SERVICES_FILE,
       entitlements: {
         'aps-environment': 'production',
       },
-      associatedDomains: ['applinks:app.chatwoot.com'],
+      associatedDomains: ['applinks:solace.nuuxia.com'],
     },
     android: {
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#ffffff',
       },
-      package: 'com.chatwoot.app',
+      package: 'com.solace.app',
       permissions: [
         'android.permission.CAMERA',
         'android.permission.READ_EXTERNAL_STORAGE',
@@ -49,7 +49,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         'android.permission.RECORD_AUDIO',
         'android.permission.READ_MEDIA_IMAGES',
       ],
-      // Please use the relative path to the google-services.json file
       googleServicesFile: process.env.EXPO_PUBLIC_ANDROID_GOOGLE_SERVICES_FILE,
       intentFilters: [
         {
@@ -58,7 +57,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           data: [
             {
               scheme: 'https',
-              host: 'app.chatwoot.com',
+              host: 'solace.nuuxia.com',
               pathPrefix: '/app/accounts/',
               pathPattern: '/*/conversations/*',
             },
@@ -69,11 +68,11 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     extra: {
       eas: {
-        projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
-        storybookEnabled: process.env.EXPO_STORYBOOK_ENABLED,
+        projectId: '83b988ac-0dd7-412e-8705-c8497e27f3dd',
+        storybookEnabled: process.env.EXPO_PUBLIC_STORYBOOK_ENABLED,
       },
     },
-    owner: 'chatwoot',
+    owner: 'nuuxia',
     plugins: [
       'expo-font',
       [
@@ -95,7 +94,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       [
         'expo-build-properties',
         {
-          // https://github.com/invertase/notifee/issues/808#issuecomment-2175934609
           android: {
             minSdkVersion: 24,
             compileSdkVersion: 35,
